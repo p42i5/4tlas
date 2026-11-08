@@ -86,6 +86,8 @@
     #atlas-studio[data-inline="true"] .as-art { height:145px; }
     #atlas-studio[data-inline="true"] .as-mast { padding-right:90px; flex-wrap:wrap; }
     #atlas-studio .as-range { display:grid; gap:6px; }
+    #atlas-studio #as-grid-heading { margin-bottom:12px; }
+    #atlas-studio #outfits { margin-top:26px; padding-top:20px; border-top:1px solid var(--as-line); scroll-margin-top:20px; }
     #atlas-studio .as-range-row { display:grid; grid-template-columns:108px minmax(0,1fr); gap:10px; }
     #atlas-studio .as-range-label { display:grid; grid-template-columns:16px 1fr; align-content:center; column-gap:5px; }
     #atlas-studio .as-range-label strong { font-weight:500; font-size:13px; }
@@ -102,11 +104,10 @@
     #atlas-studio .as-range .as-swatches { position:absolute; left:83px; right:5px; bottom:6px; gap:4px; padding:0; }
     #atlas-studio .as-range .as-swatch { min-height:24px; padding:3px 5px; }
     #atlas-studio .as-range-empty { min-height:76px; border:1px dashed var(--as-line); border-radius:5px; display:flex; align-items:center; justify-content:center; padding:8px; color:var(--as-muted); font-size:11px; text-align:center; }
-    #atlas-studio[data-view="pieces"] .as-strip { display:none; }
     #atlas-studio[data-view="pieces"] .as-mast { padding-bottom:10px; }
     #atlas-studio[data-view="pieces"] .as-title { padding:12px 0; }
     #atlas-studio[data-view="pieces"] .as-toolbar { padding-bottom:10px; }
-    #atlas-studio[data-view="pieces"] .as-subtitle { display:none; }
+    #atlas-studio[data-view="pieces"] #as-subtitle { display:none; }
     #atlas-studio[data-view="outfits"] .as-mast { padding-bottom:10px; }
     #atlas-studio[data-view="outfits"] .as-title { padding:12px 0; }
     #atlas-studio[data-view="outfits"] .as-toolbar { padding-bottom:10px; }
@@ -131,16 +132,15 @@
     <div>
       <div class="as-eyebrow" id="as-eyebrow">A wearable starting point</div>
       <h1>Your collection, together.</h1>
-      <p class="as-subtitle" id="as-subtitle">Every design in one view. Select a piece to work on its fabric, pattern and next step.</p>
+      <p class="as-subtitle" id="as-subtitle">Your garment grid and six complete looks on one page.</p>
     </div>
     <div class="as-total"><strong id="as-count">8 designs</strong><span id="as-sample-count">16 planned colourways · start with 8 samples</span></div>
   </div>
   <div class="as-toolbar">
     <div class="as-tabs" role="tablist" aria-label="Collection view">
-      <button type="button" class="as-tab" role="tab" data-view="pieces" aria-selected="true" aria-controls="as-content">The grid</button>
-      <button type="button" class="as-tab" role="tab" data-view="outfits" aria-selected="false" aria-controls="as-content">The outfits</button>
-      <button type="button" class="as-tab" role="tab" data-view="archive" aria-selected="false" aria-controls="as-content">Original 18</button>
-      <button type="button" class="as-tab" role="tab" data-view="budget" aria-selected="false" aria-controls="as-content">Budget</button>
+      <button type="button" class="as-tab" role="tab" data-view="pieces" aria-selected="true" aria-controls="as-board">Collection</button>
+      <button type="button" class="as-tab" role="tab" data-view="archive" aria-selected="false" aria-controls="as-board">Original 18</button>
+      <button type="button" class="as-tab" role="tab" data-view="budget" aria-selected="false" aria-controls="as-board">Budget</button>
     </div>
     <div class="as-size" role="group" aria-label="Starter collection size">
       <button type="button" data-size="4" aria-pressed="false">4 essentials</button>
@@ -148,8 +148,10 @@
       <button type="button" data-size="8" aria-pressed="true">With leather · 8</button>
     </div>
   </div>
-  <div class="as-strip" id="as-strip"><span><strong>2</strong> tops</span><span><strong>2</strong> bottoms</span><span><strong>1</strong> layer</span><span><strong>1</strong> accessory</span><span><strong>4</strong> base outfits</span></div>
-  <section id="as-content" role="tabpanel" aria-label="Collection board"></section>
+  <div class="as-strip" id="as-strip"><span><strong>3</strong> tops</span><span><strong>2</strong> bottoms</span><span><strong>2</strong> jackets</span><span><strong>1</strong> accessory</span><span><strong>6</strong> styled looks</span></div>
+  <section id="as-board" role="tabpanel" aria-label="Collection board">
+  <h2 id="as-grid-heading">The garment grid</h2>
+  <div id="as-content"></div>
   <p class="as-view-note" id="as-view-note">Illustrative starter shapes and colours. Your patterns and reference pictures will guide the final designs.</p>
   <section class="as-editor" id="as-editor" aria-label="Selected piece details" hidden>
     <div class="as-editor-head"><h2 id="as-editor-title">Selected piece</h2><button class="as-action" type="button" id="as-close">Close details</button></div>
@@ -166,6 +168,8 @@
       </div>
       <div class="as-save"><button class="as-action as-action-primary" type="submit">Save piece</button><span class="as-status" id="as-editor-status" aria-live="polite"></span></div>
     </form>
+  </section>
+  <section id="outfits" aria-label="Six complete looks"></section>
   </section>
   <footer class="as-footer">
     <span id="as-save-status" aria-live="polite">Starter proposal · original collection kept separately</span>
@@ -192,7 +196,7 @@ window.ATLAS_STUDIO_DATA = {"starter":{"T1":{"name":"Boxy everyday tee","fabric"
     if (!saved || [6,7].indexOf(saved.version)===-1) return;
     if (saved.version===6)state.size=8;
     else if ([4,6,8].indexOf(saved.size)!==-1)state.size=saved.size;
-    if (['pieces','outfits','archive','budget'].indexOf(saved.view)!==-1)state.view=saved.view;
+    if (['pieces','outfits','archive','budget'].indexOf(saved.view)!==-1)state.view=saved.view==='outfits'?'pieces':saved.view;
     if (ids.indexOf(saved.selected)!==-1)state.selected=saved.selected;
     if (saved.colours && typeof saved.colours==='object')ids.forEach(function(id){if(typeof saved.colours[id]==='string')state.colours[id]=saved.colours[id];});
     if (['none','L1','L2','L3'].indexOf(saved.layer)!==-1)state.layer=saved.layer;
@@ -207,7 +211,7 @@ window.ATLAS_STUDIO_DATA = {"starter":{"T1":{"name":"Boxy everyday tee","fabric"
     }
   }
   try { if(inline)load(window.openai && window.openai.widgetState && window.openai.widgetState.modelContent);else load(JSON.parse(localStorage.getItem(storeKey)||'null')); } catch (_) {}
-  if (!inline && window.location.hash==='#outfits')state.view='outfits';
+  if (!inline && ['#outfits','#collection'].indexOf(window.location.hash)!==-1)state.view='pieces';
   function snapshot(images) {
     var overrides={};
     ids.forEach(function(id){if(state.overrides[id]){overrides[id]=Object.assign({},state.overrides[id]);if(!images)delete overrides[id].photo;}});
@@ -253,7 +257,7 @@ window.ATLAS_STUDIO_DATA = {"starter":{"T1":{"name":"Boxy everyday tee","fabric"
   }
   function renderPieces() {
     var grid=node('div','as-range');grid.setAttribute('aria-label','Collection arranged by garment type');
-    var rows=[['Tops',['T1','T2'],'Top'],['Trousers',['B1','B2'],'Trouser'],['Jackets',['L1','L2','L3'],'Jacket'],['Coats',[],'Coat'],['Skirts',[],'Skirt'],['Dresses',[],'Dress'],['Accessories',['A1'],'Accessory']];
+    var rows=[['Tops',['T1','T2','L1'],'Top'],['Trousers',['B1','B2'],'Trouser'],['Jackets',['L2','L3'],'Jacket'],['Skirts',[],'Skirt'],['Dresses',[],'Dress'],['Accessories',['A1'],'Accessory']];
     rows.forEach(function(spec,index){
       var active=spec[1].filter(function(id){return ids.indexOf(id)<state.size;}),row=node('section','as-range-row');row.setAttribute('aria-label',spec[0]);
       var label=node('div','as-range-label');label.append(node('span','as-range-number',String(index+1)),node('strong','',spec[0]),node('span','as-range-count',active.length+' planned'));row.append(label);
@@ -306,6 +310,7 @@ window.ATLAS_STUDIO_DATA = {"starter":{"T1":{"name":"Boxy everyday tee","fabric"
         var text=node('span');text.append(node('span','as-look-piece',item.id+' · '+piece(item.id).name),node('span','as-look-colour',item.colour.name));row.append(dot,text);list.append(row);
       });look.append(head,art,list);grid.append(look);
     });wrap.append(grid);
+    wrap.append(node('p','as-view-note','Six styling combinations reuse the same designs. Looks are not extra samples. Layers are shown open for styling; shapes, proportions and colours are provisional.'));
     if(active.some(function(id){return piece(id).photo;}))wrap.append(node('p','as-view-note','Uploaded reference photos retain their original colours; the labels show the planned colourways.'));
     return wrap;
   }
@@ -356,13 +361,17 @@ window.ATLAS_STUDIO_DATA = {"starter":{"T1":{"name":"Boxy everyday tee","fabric"
     el('as-sample-count').textContent=state.view==='archive'?'Your original collection':variants+' planned colourways · start with '+state.size+' samples';
     el('as-eyebrow').textContent=state.view==='archive'?'The existing collection':'A wearable starting point';
     el('as-strip').replaceChildren();
-    var mix=state.view==='archive'?[[5,'tops'],[2,'bottoms'],[2,'jackets'],[2,'coats'],[5,'accessories'],[2,'dresses']]:[[2,'tops'],[2,'bottoms']];
-    if(state.view!=='archive'&&state.size>=6)mix=mix.concat([[state.size===8?3:1,state.size===8?'layers':'layer'],[1,'accessory']]);
+    var mix=state.view==='archive'?[[5,'tops'],[2,'bottoms'],[2,'jackets'],[2,'coats'],[5,'accessories'],[2,'dresses']]:[[state.size>=6?3:2,'tops'],[2,'bottoms']];
+    if(state.view!=='archive'&&state.size===8)mix.push([2,'jackets']);
+    if(state.view!=='archive'&&state.size>=6)mix.push([1,'accessory']);
     if(state.view!=='archive')mix.push([6,'styled looks']);
     mix.forEach(function(item){var s=node('span');s.append(node('strong','',String(item[0])),document.createTextNode(' '+item[1]));el('as-strip').append(s);});
-    var content=state.view==='pieces'?renderPieces():state.view==='outfits'?renderOutfits():state.view==='archive'?renderArchive():renderBudget();
+    var content=state.view==='pieces'?renderPieces():state.view==='archive'?renderArchive():renderBudget();
     el('as-content').replaceChildren(content);
-    el('as-view-note').textContent=state.view==='archive'?'Original drawings retained. Select a piece to open the existing working grid.':state.view==='outfits'?'Six styling combinations reuse the same designs. Looks are not extra samples. Layers are shown open for styling; shapes, proportions and colours are provisional.':'One design per cell, with its colourways inside. Jackets include the overshirt and vest. Open slots are unplanned and are not included in the design or sample count.';
+    el('as-grid-heading').hidden=state.view!=='pieces';
+    el('outfits').hidden=state.view!=='pieces';
+    if(state.view==='pieces')el('outfits').replaceChildren(renderOutfits());else el('outfits').replaceChildren();
+    el('as-view-note').textContent=state.view==='archive'?'Original drawings retained. Select a piece to open the existing working grid.':state.view==='budget'?'One sample per design. Enter quotes in the Collection page to track your costs.':'Tops include the collared shirt and overshirt. Jackets include the leather jacket and vest. Open slots are unplanned and do not add to the design or sample count.';
     if(state.view!=='pieces')el('as-editor').hidden=true;
   }
   function openEditor() {
