@@ -36,12 +36,12 @@
     #atlas-studio .as-swatch[aria-pressed="true"] { border-color:var(--as-accent); color:var(--as-ink); background:var(--as-soft); }
     #atlas-studio .as-swatch-dot { width:12px; height:12px; border-radius:50%; background:var(--swatch); border:1px solid #8888; flex:none; }
     #atlas-studio .as-proposal { color:var(--as-accent); font-size:10px; letter-spacing:.3px; }
-    #atlas-studio .as-outfit-controls { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-bottom:12px; }
-    #atlas-studio .as-outfit-controls label { display:flex; gap:10px; align-items:center; }
-    #atlas-studio .as-outfit-controls select { width:auto; }
-    #atlas-studio .as-top-wrap { position:relative; height:125px; width:95%; max-width:155px; margin-bottom:-7px; }
-    #atlas-studio .as-top-wrap .as-top { height:100%; width:100%; margin:0; }
-    #atlas-studio .as-top-wrap .as-layer-image { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; z-index:2; }
+    #atlas-studio .as-outfit-intro { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+    #atlas-studio .as-outfit-intro h2 { font-size:23px; }
+    #atlas-studio .as-outfit-controls { display:flex; flex-wrap:wrap; gap:5px; }
+    #atlas-studio .as-outfit-controls button { padding:7px 10px; font-size:11px; }
+    #atlas-studio .as-outfit-controls button[aria-pressed="true"] { border-color:var(--as-accent); background:var(--as-soft); }
+    #atlas-studio .as-outfit-note { font-size:11px; color:var(--as-muted); padding:9px 0 14px; }
     #atlas-studio .as-art { height:176px; background:#fff; position:relative; display:flex; align-items:center; justify-content:center; padding:15px; }
     #atlas-studio .as-art img { display:block; width:100%; height:100%; object-fit:contain; }
     #atlas-studio .as-code { position:absolute; top:10px; left:11px; font-size:11px; color:#777d6c; letter-spacing:1px; }
@@ -49,17 +49,17 @@
     #atlas-studio .as-piece-name { display:block; font-size:13px; font-weight:500; }
     #atlas-studio .as-piece-meta { display:flex; gap:6px; justify-content:space-between; color:var(--as-muted); font-size:11px; margin-top:3px; flex-wrap:wrap; }
     #atlas-studio .as-view-note { font-size:11px; color:var(--as-muted); margin-top:12px; }
-    #atlas-studio .as-outfits { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
-    #atlas-studio .as-look { border:1px solid var(--as-line); background:var(--as-card); border-radius:7px; overflow:hidden; }
-    #atlas-studio .as-look-head { padding:13px 12px 5px; font-size:12px; display:flex; justify-content:space-between; gap:5px; }
-    #atlas-studio .as-look-head span { color:var(--as-muted); font-size:11px; }
-    #atlas-studio .as-assembly { background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; height:340px; padding:10px 4px; position:relative; }
-    #atlas-studio .as-assembly .as-top { height:125px; width:95%; max-width:155px; object-fit:contain; margin-bottom:-7px; z-index:1; }
-    #atlas-studio .as-assembly .as-bottom { height:195px; width:76%; max-width:140px; object-fit:contain; }
-    #atlas-studio .as-look-label { font-size:11px; padding:10px 12px; color:var(--as-muted); min-height:49px; }
-    #atlas-studio .as-look-extras { display:flex; justify-content:center; align-items:center; gap:12px; padding:12px; background:var(--as-card); border:1px solid var(--as-line); border-radius:7px; margin-top:12px; }
-    #atlas-studio .as-look-extras img { height:62px; width:60px; object-fit:contain; background:#fff; border-radius:3px; }
-    #atlas-studio .as-look-extras span { color:var(--as-muted); font-size:12px; max-width:300px; }
+    #atlas-studio .as-outfits { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; }
+    #atlas-studio .as-look { min-width:0; border:1px solid var(--as-line); background:var(--as-card); border-radius:7px; overflow:hidden; }
+    #atlas-studio .as-look-head { min-height:52px; padding:11px 10px; font-size:12px; display:flex; align-items:center; gap:8px; }
+    #atlas-studio .as-look-head strong { font:22px/1 Georgia,serif; color:var(--as-accent); font-weight:400; }
+    #atlas-studio .as-look-head span { font-size:11px; }
+    #atlas-studio .as-assembly { display:block; width:100%; height:280px; background:#fff; }
+    #atlas-studio .as-look-items { display:grid; align-content:start; gap:6px; margin:0; padding:10px; list-style:none; }
+    #atlas-studio .as-look-item { display:flex; gap:6px; align-items:start; font-size:10px; line-height:1.35; }
+    #atlas-studio .as-look-item .as-swatch-dot { width:10px; height:10px; margin-top:2px; }
+    #atlas-studio .as-look-piece { display:block; }
+    #atlas-studio .as-look-colour { display:block; color:var(--as-muted); margin-top:1px; }
     #atlas-studio .as-archive { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:9px; }
     #atlas-studio .as-archive .as-art { height:115px; padding:6px; }
     #atlas-studio .as-archive .as-piece-name { font-size:11px; }
@@ -107,6 +107,10 @@
     #atlas-studio[data-view="pieces"] .as-title { padding:12px 0; }
     #atlas-studio[data-view="pieces"] .as-toolbar { padding-bottom:10px; }
     #atlas-studio[data-view="pieces"] .as-subtitle { display:none; }
+    #atlas-studio[data-view="outfits"] .as-mast { padding-bottom:10px; }
+    #atlas-studio[data-view="outfits"] .as-title { padding:12px 0; }
+    #atlas-studio[data-view="outfits"] .as-toolbar { padding-bottom:10px; }
+    #atlas-studio[data-view="outfits"] #as-subtitle { display:none; }
     #atlas-studio [hidden] { display:none!important; }
     @media(max-width:1000px) { #atlas-studio .as-range .as-piece-open { grid-template-columns:60px minmax(0,1fr); } #atlas-studio .as-range .as-swatches {left:65px;} #atlas-studio .as-range .as-swatch {font-size:10px;} #atlas-studio .as-range-row {grid-template-columns:90px minmax(0,1fr);} }
     @media(max-width:760px) { #atlas-studio .as-range-row {grid-template-columns:1fr;gap:5px;} #atlas-studio .as-range-label {display:flex;gap:7px;align-items:center;} #atlas-studio .as-range-count {margin-left:auto;} #atlas-studio .as-range-cells {grid-template-columns:repeat(2,minmax(0,1fr));} #atlas-studio .as-range-empty:empty {display:none;} #atlas-studio .as-range .as-piece {min-height:94px;} #atlas-studio .as-range .as-piece-open {min-height:94px;} #atlas-studio .as-range .as-piece-text {padding-bottom:45px;} #atlas-studio .as-range .as-swatches {left:6px;} #atlas-studio .as-range .as-swatch {min-height:30px;font-size:11px;} #atlas-studio .as-range-empty {min-height:64px;} }
@@ -114,7 +118,9 @@
     @media(pointer:coarse) { #atlas-studio .as-range .as-swatch {min-height:36px;} }
     @media(min-width:1150px) { #atlas-studio .as-grid { grid-template-columns:repeat(6,minmax(0,1fr)); } #atlas-studio .as-art {height:190px;} }
     @media(min-width:850px) { #atlas-studio[data-count="8"] .as-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } #atlas-studio[data-count="8"] .as-grid .as-art {height:145px;} }
+    @media(max-width:1100px) { #atlas-studio .as-outfits {grid-template-columns:repeat(3,minmax(0,1fr));} #atlas-studio .as-assembly {height:260px;} }
     @media(max-width:650px) { #atlas-studio {padding:16px;} #atlas-studio .as-grid {grid-template-columns:repeat(2,minmax(0,1fr));} #atlas-studio .as-outfits {grid-template-columns:repeat(2,minmax(0,1fr));} #atlas-studio .as-archive {grid-template-columns:repeat(3,minmax(0,1fr));} #atlas-studio .as-form {grid-template-columns:1fr;} #atlas-studio .as-title {align-items:start;} #atlas-studio h1 {font-size:27px;} #atlas-studio .as-art {height:155px;} #atlas-studio .as-brand span {display:none;} #atlas-studio .as-toolbar {gap:8px;} }
+    @media(max-width:420px) { #atlas-studio .as-assembly {height:230px;} #atlas-studio .as-look-head {padding:10px 8px;} #atlas-studio .as-look-items {padding:10px 8px;} }
     @media(max-width:380px) { #atlas-studio {padding:12px;} #atlas-studio .as-title {display:block;} #atlas-studio .as-total {text-align:left; margin-top:10px;} #atlas-studio .as-total strong {display:inline; font-size:18px; margin-right:6px;} #atlas-studio .as-tab {padding:8px;} #atlas-studio .as-archive {grid-template-columns:repeat(2,minmax(0,1fr));} }
   </style>
   <header class="as-mast">
@@ -176,7 +182,7 @@ window.ATLAS_STUDIO_DATA = {"starter":{"T1":{"name":"Boxy everyday tee","fabric"
   var input = window.ATLAS_STUDIO_DATA;
   var inline = root.dataset.inline === 'true';
   var storeKey = 'atlas-studio-v6';
-  var state = { size: 8, view: 'pieces', selected: null, overrides: {}, colours: {}, layer: 'none' };
+  var state = { size: 8, view: 'pieces', selected: null, overrides: {}, colours: {}, layer: 'none', outfitColours: 'collection' };
   var stagedImage = null;
   var ids = ['T1','T2','B1','B2','L1','A1','L2','L3'];
   var stageNames = {idea:'Idea',pattern:'Pattern',toile:'Toile / fit test',sample:'Final sample',approved:'Approved'};
@@ -190,6 +196,7 @@ window.ATLAS_STUDIO_DATA = {"starter":{"T1":{"name":"Boxy everyday tee","fabric"
     if (ids.indexOf(saved.selected)!==-1)state.selected=saved.selected;
     if (saved.colours && typeof saved.colours==='object')ids.forEach(function(id){if(typeof saved.colours[id]==='string')state.colours[id]=saved.colours[id];});
     if (['none','L1','L2','L3'].indexOf(saved.layer)!==-1)state.layer=saved.layer;
+    if (['collection','selected'].indexOf(saved.outfitColours)!==-1)state.outfitColours=saved.outfitColours;
     if (saved.overrides && typeof saved.overrides==='object') {
       ids.forEach(function(id){var v=saved.overrides[id];if(!v||typeof v!=='object')return;
         var clean={};['name','fabric','pattern','stage','notes'].forEach(function(k){if(typeof v[k]==='string')clean[k]=v[k].slice(0,k==='notes'?1500:100);});
@@ -200,10 +207,11 @@ window.ATLAS_STUDIO_DATA = {"starter":{"T1":{"name":"Boxy everyday tee","fabric"
     }
   }
   try { if(inline)load(window.openai && window.openai.widgetState && window.openai.widgetState.modelContent);else load(JSON.parse(localStorage.getItem(storeKey)||'null')); } catch (_) {}
+  if (!inline && window.location.hash==='#outfits')state.view='outfits';
   function snapshot(images) {
     var overrides={};
     ids.forEach(function(id){if(state.overrides[id]){overrides[id]=Object.assign({},state.overrides[id]);if(!images)delete overrides[id].photo;}});
-    return {version:7,size:state.size,view:state.view,selected:state.selected,overrides:overrides,colours:Object.assign({},state.colours),layer:state.layer};
+    return {version:7,size:state.size,view:state.view,selected:state.selected,overrides:overrides,colours:Object.assign({},state.colours),layer:state.layer,outfitColours:state.outfitColours};
   }
   function persist() {
     if(inline) {
@@ -218,9 +226,9 @@ window.ATLAS_STUDIO_DATA = {"starter":{"T1":{"name":"Boxy everyday tee","fabric"
     var p=piece(id), options=p.colourways||[];
     return options.find(function(c){return c.id===state.colours[id];})||options[0]||{id:'default',name:'To choose',hex:'#dddddd'};
   }
-  function picture(id) {
+  function picture(id,colourId) {
     var p=piece(id), variants=input.variants&&input.variants[p.image];
-    return p.photo||(variants&&variants[colour(id).id])||input.images[p.image];
+    return p.photo||(variants&&variants[colourId||colour(id).id])||input.images[p.image];
   }
   function image(src,alt,cls) {var i=node('img',cls);i.src=src;i.alt=alt;return i;}
   function card(id,p,src,archive) {
@@ -262,23 +270,67 @@ window.ATLAS_STUDIO_DATA = {"starter":{"T1":{"name":"Boxy everyday tee","fabric"
     });return grid;
   }
   function renderOutfits() {
-    var wrap=node('div');var grid=node('div','as-outfits');
-    if(state.size>=6){
-      if(ids.slice(0,state.size).indexOf(state.layer)===-1)state.layer='none';
-      var controls=node('div','as-outfit-controls'),label=node('label','','Try a layer'),select=node('select');select.setAttribute('aria-label','Outfit layer');
-      ['none'].concat(state.size===8?['L1','L2','L3']:['L1']).forEach(function(id){var option=node('option','',id==='none'?'No extra layer':piece(id).name);option.value=id;select.append(option);});
-      select.value=state.layer;select.addEventListener('change',function(e){state.layer=e.target.value;render();persist();});label.append(select);controls.append(label);wrap.append(controls);
-    } else state.layer='none';
-    [['T1','B1'],['T1','B2'],['T2','B1'],['T2','B2']].forEach(function(pair,index){
-      var look=node('article','as-look');var head=node('div','as-look-head','Look '+(index+1));head.append(node('span','',pair.join(' + ')));
-      var assembly=node('div','as-assembly'),top=node('div','as-top-wrap');top.append(image(picture(pair[0]),piece(pair[0]).name,'as-top'));
-      if(state.layer!=='none')top.append(image(picture(state.layer),piece(state.layer).name,'as-layer-image'));
-      assembly.append(top,image(picture(pair[1]),piece(pair[1]).name,'as-bottom'));
-      look.append(head,assembly,node('div','as-look-label',piece(pair[0]).name+' + '+piece(pair[1]).name+(state.layer!=='none'?' + '+piece(state.layer).name:'')));grid.append(look);
+    var presets=[
+      {name:'Everyday layers',items:[['T1','chalk'],['B1','charcoal'],['L1','olive'],['A1','natural']]},
+      {name:'Soft utility',items:[['T2','olive'],['B2','stone'],['L1','charcoal'],['A1','charcoal']]},
+      {name:'Leather + tailoring',items:[['T1','washed-black'],['B1','stone'],['L2','black'],['A1','natural']]},
+      {name:'Relaxed leather',items:[['T2','chalk'],['B2','olive'],['L2','chocolate'],['A1','charcoal']]},
+      {name:'Vest + drawstring',items:[['T1','chalk'],['B2','stone'],['L3','chocolate'],['A1','natural']]},
+      {name:'Vest + tailoring',items:[['T2','olive'],['B1','charcoal'],['L3','black'],['A1','charcoal']]}
+    ];
+    var active=ids.slice(0,state.size),seenDesigns=new Set(),seenColours=new Set();
+    var looks=presets.map(function(preset,index){
+      var items=preset.items.filter(function(item){return active.indexOf(item[0])!==-1;});
+      if(state.size===6&&index>=2)items.splice(2,0,['L1',index%2?'charcoal':'olive']);
+      return {name:state.size===8?preset.name:['Everyday','Relaxed utility','Dark + stone','Chalk + olive','Easy proportions','Tailored proportions'][index],items:items.map(function(item){
+        var c=state.outfitColours==='selected'?colour(item[0]):piece(item[0]).colourways.find(function(c){return c.id===item[1];})||colour(item[0]);
+        seenDesigns.add(item[0]);seenColours.add(item[0]+':'+c.id);return {id:item[0],colour:c};
+      })};
     });
-    wrap.append(grid);
-    if(state.size>=6){var extras=node('div','as-look-extras');extras.append(image(picture('A1'),piece('A1').name),node('span','','The same accessory can be used across all four outfits. Colours follow your selections in The pieces.'));wrap.append(extras);}
+    var wrap=node('div'),intro=node('div','as-outfit-intro'),heading=node('div');
+    heading.append(node('h2','','Six looks. The whole collection.'),node('p','as-subtitle',seenDesigns.size+' / '+active.length+' designs · '+seenColours.size+' / '+active.reduce(function(n,id){return n+piece(id).colourways.length;},0)+' planned colourways shown'));
+    var controls=node('div','as-outfit-controls');controls.setAttribute('role','group');controls.setAttribute('aria-label','Outfit colours');
+    [['collection','Collection colourways'],['selected','My selected colours']].forEach(function(option){
+      var button=node('button','as-action',option[1]);button.type='button';button.setAttribute('aria-pressed',String(state.outfitColours===option[0]));
+      button.addEventListener('click',function(){state.outfitColours=option[0];render();persist();});controls.append(button);
+    });intro.append(heading,controls);wrap.append(intro);
+    wrap.append(node('p','as-outfit-note',state.outfitColours==='collection'?'Styled to show every planned colourway. Switch to My selected colours to use your choices from The grid.':'Each look uses your colour choices from The grid. Switch to Collection colourways to see every planned option.'));
+    var grid=node('div','as-outfits');
+    looks.forEach(function(plan,index){
+      var look=node('article','as-look');look.setAttribute('aria-label','Look '+(index+1)+' · '+plan.name);
+      var head=node('div','as-look-head');head.append(node('strong','','0'+(index+1)),node('span','',plan.name));
+      var art=outfitArt(plan.items,index),list=node('ul','as-look-items');
+      plan.items.forEach(function(item){
+        var row=node('li','as-look-item');row.dataset.piece=item.id;row.dataset.colour=item.colour.id;
+        var dot=node('span','as-swatch-dot');dot.style.setProperty('--swatch',item.colour.hex);dot.setAttribute('aria-hidden','true');
+        var text=node('span');text.append(node('span','as-look-piece',item.id+' · '+piece(item.id).name),node('span','as-look-colour',item.colour.name));row.append(dot,text);list.append(row);
+      });look.append(head,art,list);grid.append(look);
+    });wrap.append(grid);
+    if(active.some(function(id){return piece(id).photo;}))wrap.append(node('p','as-view-note','Uploaded reference photos retain their original colours; the labels show the planned colourways.'));
     return wrap;
+  }
+  function outfitArt(items,index) {
+    var ns='http://www.w3.org/2000/svg';
+    function svgNode(tag,attrs){var n=document.createElementNS(ns,tag);Object.keys(attrs||{}).forEach(function(k){n.setAttribute(k,attrs[k]);});return n;}
+    var art=svgNode('svg',{viewBox:'0 0 280 450',class:'as-assembly',role:'img','aria-label':items.map(function(item){return piece(item.id).name+' in '+item.colour.name;}).join(', ')});
+    var title=svgNode('title');title.textContent='Look '+(index+1)+' · '+art.getAttribute('aria-label');art.append(title);
+    function place(item,x,y,width,height,clip){
+      var img=svgNode('image',{href:picture(item.id,item.colour.id),x:x,y:y,width:width,height:height});
+      if(clip)img.setAttribute('clip-path','url(#as-open-layer-'+index+')');art.append(img);
+    }
+    var top=items[0],bottom=items[1],layer=items.find(function(item){return item.id.charAt(0)==='L';}),bag=items.find(function(item){return item.id==='A1';});
+    place(bottom,bottom.id==='B1'?19.55:11.25,144,bottom.id==='B1'?190.9:207.5,298.8);
+    place(top,17.5,15,195,182);
+    if(layer){
+      if(layer.id==='L3')place(layer,38.75,19,152.5,183);
+      else {
+        var defs=svgNode('defs'),clip=svgNode('clipPath',{id:'as-open-layer-'+index,clipPathUnits:'userSpaceOnUse'});
+        clip.append(svgNode('path',{d:'M0 0H280V450H143L121 57H109L87 450H0Z'}));defs.append(clip);art.append(defs);
+        place(layer,11.5,17,207,220.8,!piece(layer.id).photo);
+      }
+    }
+    if(bag)place(bag,177,200,95,114);
+    return art;
   }
   function renderArchive() {var grid=node('div','as-archive');Object.entries(input.archive).forEach(function(entry){var id=entry[0],p=entry[1];grid.append(card(id,p,p.image?input.images[p.image]:null,true));});return grid;}
   function renderBudget() {
@@ -306,11 +358,11 @@ window.ATLAS_STUDIO_DATA = {"starter":{"T1":{"name":"Boxy everyday tee","fabric"
     el('as-strip').replaceChildren();
     var mix=state.view==='archive'?[[5,'tops'],[2,'bottoms'],[2,'jackets'],[2,'coats'],[5,'accessories'],[2,'dresses']]:[[2,'tops'],[2,'bottoms']];
     if(state.view!=='archive'&&state.size>=6)mix=mix.concat([[state.size===8?3:1,state.size===8?'layers':'layer'],[1,'accessory']]);
-    if(state.view!=='archive')mix.push([4,'base outfits']);
+    if(state.view!=='archive')mix.push([6,'styled looks']);
     mix.forEach(function(item){var s=node('span');s.append(node('strong','',String(item[0])),document.createTextNode(' '+item[1]));el('as-strip').append(s);});
     var content=state.view==='pieces'?renderPieces():state.view==='outfits'?renderOutfits():state.view==='archive'?renderArchive():renderBudget();
     el('as-content').replaceChildren(content);
-    el('as-view-note').textContent=state.view==='archive'?'Original drawings retained. Select a piece to open the existing working grid.':state.view==='outfits'?'Four base outfits reuse the same tops and bottoms. The layer picker previews the extra pieces.':'One design per cell, with its colourways inside. Jackets include the overshirt and vest. Open slots are unplanned and are not included in the design or sample count.';
+    el('as-view-note').textContent=state.view==='archive'?'Original drawings retained. Select a piece to open the existing working grid.':state.view==='outfits'?'Six styling combinations reuse the same designs. Looks are not extra samples. Layers are shown open for styling; shapes, proportions and colours are provisional.':'One design per cell, with its colourways inside. Jackets include the overshirt and vest. Open slots are unplanned and are not included in the design or sample count.';
     if(state.view!=='pieces')el('as-editor').hidden=true;
   }
   function openEditor() {
